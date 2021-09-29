@@ -14,7 +14,7 @@ const SPELEN = 1;
 const GAMEOVER = 2;
 var spelStatus = SPELEN;
 
-var spelerX = 600; // x-positie van speler
+var spelerX = 601; // x-positie van speler
 var spelerY = 600; // y-positie van speler
 
 /* ********************************************* */
