@@ -18,6 +18,9 @@ var spelStatus = SPELEN;
 
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
+var vijandX = 600; // x-positie van vijand
+var vijandY = 50; // y-positie van vijand
+
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -28,17 +31,24 @@ var spelerY = 600; // y-positie van speler
  */
 var beweegAlles = function () {
   // vijand
+  vijandY = vijandY + 4;
 
   // kogel
-
+  
+  
   // speler
   if (keyIsDown(LEFT_ARROW)) {
-    spelerX = spelerX - 5;
+    spelerX = spelerX - 7;
   }
   if (keyIsDown(RIGHT_ARROW)) {
-    spelerX = spelerX + 5;
+    spelerX = spelerX + 7;
   }
-
+  if (keyIsDown(UP_ARROW)){
+    spelerY = spelerY - 7;
+  }
+  if (keyIsDown(DOWN_ARROW)){
+    spelerY = spelerY + 7;
+  }
 
 };
 
@@ -49,11 +59,26 @@ var beweegAlles = function () {
  */
 var verwerkBotsing = function () {
   // botsing speler tegen vijand
+ 
 
   // botsing kogel tegen vijand
 
+
   // botsing muur
-  if spelerX = 1280
+  if (spelerX >= 1280) {
+    spelerX = 1280;
+  }
+  if (spelerX <= 0){
+    spelerX = 0;
+  }
+  if (spelerY <= 0){
+    spelerY = 0;
+  }  
+  if (vijandY >= 720) {
+    vijandY = 0;
+  }
+
+  
 };
 
 /**
@@ -61,17 +86,33 @@ var verwerkBotsing = function () {
  */
 var tekenAlles = function () {
   // achtergrond
-  background('blue');
+  background('lightblue');
   // vijand
+  
+  fill("white")
+  rect(vijandX - 25, vijandY - 25, 50, 50);
+  
+  fill("lightblue");
+  ellipse(vijandX, vijandY, 10, 10);
+  
+  fill("yellow")
+  rect(vijandX-25, vijandY-21, 50,10);
+  
 
   // kogel
+  
 
   // speler
-  fill("white");
+  
+  fill("darkred");
   rect(spelerX - 25, spelerY - 25, 50, 50);
+  
   fill("black");
   ellipse(spelerX, spelerY, 10, 10);
-  fill("lightblue")
+  
+  fill("black")
+  rect(spelerX - 25, spelerY - 21, 50, 10);
+  
 
   // punten en health
 
