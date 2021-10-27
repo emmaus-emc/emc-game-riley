@@ -20,7 +20,7 @@ var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
 var vijandX = 600; // x-positie van vijand
 var vijandY = 50; // y-positie van vijand
-
+var hp = 100; // health points
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -31,23 +31,23 @@ var vijandY = 50; // y-positie van vijand
  */
 var beweegAlles = function () {
   // vijand
-  vijandY = vijandY + 4;
+  vijandY = vijandY + 6;
 
   // kogel
-  
-  
+
+
   // speler
   if (keyIsDown(LEFT_ARROW)) {
-    spelerX = spelerX - 7;
+    spelerX = spelerX - 10;
   }
   if (keyIsDown(RIGHT_ARROW)) {
-    spelerX = spelerX + 7;
+    spelerX = spelerX + 10;
   }
-  if (keyIsDown(UP_ARROW)){
-    spelerY = spelerY - 7;
+  if (keyIsDown(UP_ARROW)) {
+    spelerY = spelerY - 10;
   }
-  if (keyIsDown(DOWN_ARROW)){
-    spelerY = spelerY + 7;
+  if (keyIsDown(DOWN_ARROW)) {
+    spelerY = spelerY + 10;
   }
 
 };
@@ -59,7 +59,18 @@ var beweegAlles = function () {
  */
 var verwerkBotsing = function () {
   // botsing speler tegen vijand
- 
+  if
+  (vijandX - spelerX > -50
+  &&
+  vijandX - spelerX < 50
+  &&
+  vijandY - spelerY > -50
+    &&
+    vijandY - spelerY < 50
+  ) {
+    console.log("botsing")
+  }
+
 
   // botsing kogel tegen vijand
 
@@ -68,17 +79,18 @@ var verwerkBotsing = function () {
   if (spelerX >= 1280) {
     spelerX = 1280;
   }
-  if (spelerX <= 0){
+  if (spelerX <= 0) {
     spelerX = 0;
   }
-  if (spelerY <= 0){
+  if (spelerY <= 0) {
     spelerY = 0;
-  }  
+  }
   if (vijandY >= 720) {
     vijandY = 0;
+    vijandX = random(0, 1280);
   }
 
-  
+
 };
 
 /**
@@ -88,36 +100,35 @@ var tekenAlles = function () {
   // achtergrond
   background('lightblue');
   // vijand
-  
+
   fill("white")
   rect(vijandX - 25, vijandY - 25, 50, 50);
-  
+
   fill("lightblue");
   ellipse(vijandX, vijandY, 10, 10);
-  
+
   fill("yellow")
-  rect(vijandX-25, vijandY-21, 50,10);
-  
+  rect(vijandX - 25, vijandY - 21, 50, 10);
+
 
   // kogel
-  
+
 
   // speler
-  
+
   fill("darkred");
   rect(spelerX - 25, spelerY - 25, 50, 50);
-  
+
   fill("black");
   ellipse(spelerX, spelerY, 10, 10);
-  
+
   fill("black")
   rect(spelerX - 25, spelerY - 21, 50, 10);
-  
+
 
   // punten en health
 
-};
-
+}
 /**
  * return true als het gameover is
  * anders return false
