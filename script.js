@@ -20,6 +20,10 @@ var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
 var vijandX = 600; // x-positie van vijand
 var vijandY = 50; // y-positie van vijand
+var vijandX1 = 300; // x-positie van vijand1
+var vijandY1 = 50; // y-positie van vijand1
+var vijandX2 = 900; // x-positie van vijand2
+var vijandY2 = 50; // y-positie van vijand2
 var hp = 1; // health points
 var punten = 0; //points
 /* ********************************************* */
@@ -32,7 +36,8 @@ var punten = 0; //points
 var beweegAlles = function () {
   // vijand
   vijandY = vijandY + 6;
-
+  vijandY1 = vijandY1 + 6;
+  vijandY2 = vijandY2 + 6;
   // kogel
 
 
@@ -66,18 +71,45 @@ var verwerkBotsing = function () {
   &&
   vijandY - spelerY > -50
     &&
-  vijandY - spelerY < 50
+    vijandY - spelerY < 50
   ) {
     console.log("botsing")
-  hp = hp - 1;
+    hp = hp - 1;
   }
+
+  if
+  (vijandX1 - spelerX > -50
+  &&
+  vijandX1 - spelerX < 50
+  &&
+  vijandY1 - spelerY > -50
+    &&
+    vijandY1 - spelerY < 50
+  ) {
+    console.log("botsing")
+    hp = hp - 1;
+  }
+
+  if
+  (vijandX2 - spelerX > -50
+  &&
+  vijandX2 - spelerX < 50
+  &&
+  vijandY2 - spelerY > -50
+    &&
+    vijandY2 - spelerY < 50
+  ) {
+    console.log("botsing")
+    hp = hp - 1;
+  }
+
 
 
 
   // botsing kogel tegen vijand
 
 
-  // botsing muur
+  // botsing muur speler
   if (spelerX >= 1280) {
     spelerX = 1280;
   }
@@ -87,11 +119,22 @@ var verwerkBotsing = function () {
   if (spelerY <= 0) {
     spelerY = 0;
   }
+  if (spelerY >= 720){
+    spelerY = 720;
+  }
+//botsing muur vijanden 
   if (vijandY >= 720) {
     vijandY = 0;
     vijandX = random(0, 1280);
   }
-
+  if (vijandY1 >= 720) {
+    vijandY1 = 0;
+    vijandX1 = random(0, 1280);
+  }
+  if (vijandY2 >= 720) {
+    vijandY2 = 0;
+    vijandX2 = random(0, 1280);
+  }
 
 };
 
@@ -101,7 +144,7 @@ var verwerkBotsing = function () {
 var tekenAlles = function () {
   // achtergrond
   background('lightblue');
-  // vijand
+// vijand
 
   fill("white")
   rect(vijandX - 25, vijandY - 25, 50, 50);
@@ -112,6 +155,27 @@ var tekenAlles = function () {
   fill("yellow")
   rect(vijandX - 25, vijandY - 21, 50, 10);
 
+// vijand1
+
+  fill("white")
+  rect(vijandX1 - 25, vijandY1 - 25, 50, 50);
+
+  fill("lightblue");
+  ellipse(vijandX1, vijandY1, 10, 10);
+
+  fill("yellow")
+  rect(vijandX1 - 25, vijandY1 - 21, 50, 10);
+
+//vijand2
+
+  fill("white")
+  rect(vijandX2 - 25, vijandY2 - 25, 50, 50);
+
+  fill("lightblue");
+  ellipse(vijandX2, vijandY2, 10, 10);
+
+  fill("yellow")
+  rect(vijandX2 - 25, vijandY2 - 21, 50, 10);
 
   // kogel
 
@@ -129,19 +193,19 @@ var tekenAlles = function () {
 
 
   // punten en health
-textSize(90);
-text(hp,50,100);
-punten = punten + 1/50;
-text('punten: \n' + floor(punten), 900, 80);
+  textSize(90);
+  text(hp, 50, 100);
+  punten = punten + 1 / 50;
+  text('punten: \n' + floor(punten), 900, 80);
 };
 /**
  * return true als het gameover is
  * anders return false
  */
 var checkGameOver = function () {
-  if (hp == 0){
+  if (hp == 0) {
     return true;
-}
+  }
   return false;
 };
 
@@ -178,12 +242,12 @@ function draw() {
   }
   if (spelStatus === GAMEOVER) {
     // teken game-over scherm
-  background('black')
-  textSize(150)
-  fill('lightblue')
-  text("GameOver >:]",170, 360)
-  textSize(90)
-  fill('lightblue')
-  text("Score:" + floor(punten), 170, 540)
+    background('black')
+    textSize(150)
+    fill('lightblue')
+    text("GameOver >:]", 170, 360)
+    textSize(90)
+    fill('lightblue')
+    text("Score:" + floor(punten), 170, 540)
   }
 }
