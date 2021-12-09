@@ -18,7 +18,7 @@ var spelStatus = SPELEN;
 
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
-var vijandX = 600; // x-positie van vijand
+var vijandX = 300; // x-positie van vijand
 var vijandY = 50; // y-positie van vijand
 var vijandX1 = 300; // x-positie van vijand1
 var vijandY1 = 50; // y-positie van vijand1
@@ -64,44 +64,23 @@ var beweegAlles = function () {
  */
 var verwerkBotsing = function () {
   // botsing speler tegen vijand
-  if
-  (vijandX - spelerX > -50
-  &&
-  vijandX - spelerX < 50
-  &&
-  vijandY - spelerY > -50
+
+  for (var i = 0; i < 8; i = i + 1) {
+    if
+    (vijandX+i*100 - spelerX > -50
     &&
-    vijandY - spelerY < 50
-  ) {
-    console.log("botsing")
-    hp = hp - 1;
+    vijandX+i*100 - spelerX < 50
+    &&
+    vijandY - spelerY > -50
+      &&
+      vijandY - spelerY < 50
+    ) {
+      console.log("botsing")
+      hp = hp - 1;
+    }
   }
 
-  if
-  (vijandX1 - spelerX > -50
-  &&
-  vijandX1 - spelerX < 50
-  &&
-  vijandY1 - spelerY > -50
-    &&
-    vijandY1 - spelerY < 50
-  ) {
-    console.log("botsing")
-    hp = hp - 1;
-  }
 
-  if
-  (vijandX2 - spelerX > -50
-  &&
-  vijandX2 - spelerX < 50
-  &&
-  vijandY2 - spelerY > -50
-    &&
-    vijandY2 - spelerY < 50
-  ) {
-    console.log("botsing")
-    hp = hp - 1;
-  }
 
 
 
@@ -119,21 +98,18 @@ var verwerkBotsing = function () {
   if (spelerY <= 0) {
     spelerY = 0;
   }
-  if (spelerY >= 720){
+  if (spelerY >= 720) {
     spelerY = 720;
   }
-//botsing muur vijanden 
+  //botsing muur vijanden 
   if (vijandY >= 720) {
     vijandY = 0;
-    vijandX = random(0, 1280);
   }
   if (vijandY1 >= 720) {
     vijandY1 = 0;
-    vijandX1 = random(0, 1280);
   }
   if (vijandY2 >= 720) {
     vijandY2 = 0;
-    vijandX2 = random(0, 1280);
   }
 
 };
@@ -144,38 +120,17 @@ var verwerkBotsing = function () {
 var tekenAlles = function () {
   // achtergrond
   background('lightblue');
-// vijand
+  // vijand
+  for (var i = 0; i < 8; i = i + 1) {
+    fill("white")
+    rect(vijandX + (i * 100), vijandY - 25, 50, 50);
 
-  fill("white")
-  rect(vijandX - 25, vijandY - 25, 50, 50);
+    fill("lightblue");
+    ellipse(vijandX + (i * 100) + 23, vijandY + 2, 10, 10);
 
-  fill("lightblue");
-  ellipse(vijandX, vijandY, 10, 10);
-
-  fill("yellow")
-  rect(vijandX - 25, vijandY - 21, 50, 10);
-
-// vijand1
-
-  fill("white")
-  rect(vijandX1 - 25, vijandY1 - 25, 50, 50);
-
-  fill("lightblue");
-  ellipse(vijandX1, vijandY1, 10, 10);
-
-  fill("yellow")
-  rect(vijandX1 - 25, vijandY1 - 21, 50, 10);
-
-//vijand2
-
-  fill("white")
-  rect(vijandX2 - 25, vijandY2 - 25, 50, 50);
-
-  fill("lightblue");
-  ellipse(vijandX2, vijandY2, 10, 10);
-
-  fill("yellow")
-  rect(vijandX2 - 25, vijandY2 - 21, 50, 10);
+    fill("yellow")
+    rect(vijandX + (i * 100), vijandY - 21, 50, 10);
+  }
 
   // kogel
 
